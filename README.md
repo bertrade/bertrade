@@ -1,4 +1,6 @@
-# bertrade API
+# Bertrade API
+
+<img src="https://travis-ci.org/bertrade/bertrade-api.svg?branch=master"/>
 
 ### Endpoints
 
