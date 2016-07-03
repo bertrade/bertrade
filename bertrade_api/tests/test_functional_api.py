@@ -1,5 +1,5 @@
 '''
-Tests API endpoints
+Tests suite for API endpoints.
 '''
 import os
 import sys
@@ -12,13 +12,11 @@ from api import app
 
 API_ROOT_URL = '/api/v1'
 
+
 class BertradeApiTest(unittest.TestCase):
 
     def setUp(self):
         self.api = app.test_client()
-
-    def tearDown(self):
-        pass
 
     def test_list_stocks(self):
         response = self.api.get(API_ROOT_URL + '/stocks')
@@ -33,7 +31,13 @@ class BertradeApiTest(unittest.TestCase):
         self.fail('Test not finished!')
 
     def test_stock_by_name(self):
-        response = self.api.get(API_ROOT_URL + '/stocks?name=FUNO')
+        response = self.api.get(API_ROOT_URL + '/stocks?name=Wal+Mart')
+        response_test = json.loads(response.data)
+        self.assertEqual({}, response_test)
+        self.fail('Test not finished!')
+
+    def test_stock_by_industry_name(self):
+        response = self.api.get(API_ROOT_URL + '/stocks?industry=retail')
         response_test = json.loads(response.data)
         self.assertEqual({}, response_test)
         self.fail('Test not finished!')

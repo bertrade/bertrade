@@ -1,0 +1,26 @@
+{
+    "stock_exchange": "bmv",
+    "stocks": [{
+        "local_ticker": "AC",
+        "yahoo_ticker": "",
+        "bloomberg_ticker": "AC.MX",
+        "name": "ARCA CONTINENTAL, S.A.B. DE C.V.",
+        "img": "",
+        "listing_date": "13\/12\/2001",
+        "industries": ["Consumer Staples", "Consumer Products"],
+        "company_description": "Bottles non-alcoholic branded beverages.",
+        "brands_products": ["Coca-Cola", "Ciel", "Jugos del Valle"],
+        "key_people": ["Tomas Alberto Fernandez", "Luis Arizpe"]
+    }, {
+        "local_ticker": "ALSEA",
+        "yahoo_ticker": "",
+        "bloomberg_ticker": "ALSEA.MX",
+        "name": "ALSEA, S.A.B. DE C.V.",
+        "img": "",
+        "listing_date": "25\/06\/1999",
+        "industries": ["Consumer Discretionary", "Restaurants"],
+        "company_description": "Multi-brand operator fast food and casual dining.",
+        "brands_products": ["Dominos Pizza", "Starbucks", "Burger King"],
+        "key_people": ["Alberto Torrado", "Ivan Moguel"]
+    }]
+}
