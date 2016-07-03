@@ -22,8 +22,8 @@ class StockModelTest(unittest.TestCase):
         self.assertEqual(assert_obj.name, 'ARCA CONTINENTAL, S.A.B. DE C.V.')
         self.assertEqual(assert_obj.img, '')
         self.assertEqual(assert_obj.listing_date, '13/12/2001')
-        self.assertEqual(assert_obj.industries, ['Consumer Staples',
-                         'Consumer Products'])
+        self.assertEqual(assert_obj.industries,
+                         ['Consumer Staples', 'Consumer Products'])
         self.assertEqual(assert_obj.company_description,
                          'Bottles non-alcoholic branded beverages.')
         self.assertEqual(assert_obj.brands_products,
