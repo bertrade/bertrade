@@ -7,11 +7,15 @@ import json
 API_ROOT_URL = '/api/v1'
 
 app = Flask(__name__)
+test_mode = False
 
 
 @app.route(API_ROOT_URL + '/stocks', methods=['GET'])
 def get_all_stocks():
-    return Response(open('stocks.json').read(), mimetype='application/json')
+    if not test_mode:
+        return Response(open('stocks.json').read(), mimetype='application/json')
+    else:
+        return Response(open('tests/test_stocks.json').read(), mimetype='application/json')
 
 
 @app.route(API_ROOT_URL + '/stocks/<ticker>', methods=['GET'])
@@ -39,8 +43,11 @@ def not_found(error):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
+    parser.add_argument('-m', '--mode', default='dev')
     parser.add_argument('-p', '--public', default='false')
     args = vars(parser.parse_args())
+    if args['mode'] == 'test':
+        test_mode = True
     if args['public'] == 'true':
         app.run('0.0.0.0')
     else:

@@ -42,7 +42,8 @@ class StockModelTest(unittest.TestCase):
                       img='http://img.ly', industries=industries,
                       brands_products=brands_products,
                       company_description=company_description,
-                      listing_date='01/05/2016', key_people=key_people)
+                      listing_date='01/05/2016', key_people=key_people,
+                      test_mode=True)
 
         self.assertEqual(stock.name, 'Corpus corporation')
         self.assertEqual(stock.yahoo_ticker, 'CPS')
@@ -55,7 +56,7 @@ class StockModelTest(unittest.TestCase):
         self.assertEqual(stock.key_people, key_people)
 
     def test_find_all_stocks(self):
-        stocks = Stock.find_all()
+        stocks = Stock.find_all(test_mode=True)
         stock_1 = stocks[0]
         self._assert_first_stock(stock_1)
 
@@ -76,15 +77,15 @@ class StockModelTest(unittest.TestCase):
                          ['Alberto Torrado', 'Ivan Moguel'])
 
     def test_find_stock_by_ticker(self):
-        stock = Stock.find('AC')
+        stock = Stock.find('AC', test_mode=True)
         self._assert_first_stock(stock)
 
     def test_single_stock_by_name(self):
-        stock = Stock.find_one({'name': 'Arca Continental'})
+        stock = Stock.find_one({'name': 'Arca Continental'}, test_mode=True)
         self._assert_first_stock(stock)
 
     def test_find_allstocks_by_industry_name(self):
-        stock = Stock.find({'industry': 'Consumer Products'})
+        stock = Stock.find({'industry': 'Consumer Products'}, test_mode=True)
         self._assert_first_stock(stock)
 
 

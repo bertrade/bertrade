@@ -12,6 +12,7 @@ class Stock():
         listing_date = kwargs.get('listing_date', [])
 
         # Optional args
+        test_mode = kwargs.get('test_mode', False)
         img = kwargs.get('img')
         industries = kwargs.get('industries', [])
         brands_products = kwargs.get('brands_products', [])
@@ -28,15 +29,16 @@ class Stock():
         self.brands_products = brands_products
         self.key_people = key_people
         self.company_description = company_description
+        self.test_mode = test_mode
 
     @staticmethod
-    def find(search_dict):
+    def find(search_dict, test_mode=False):
         return None
 
     @staticmethod
-    def find_one(search_dict):
+    def find_one(search_dict, test_mode=False):
         return None
 
     @staticmethod
-    def find_all():
+    def find_all(test_mode=False):
         return []

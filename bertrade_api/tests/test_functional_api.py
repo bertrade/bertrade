@@ -17,6 +17,7 @@ class BertradeApiTest(unittest.TestCase):
 
     def setUp(self):
         self.api = app.test_client()
+        self.api.test_mode = True
 
     def _assert_first_stock(self, assert_obj):
         expected_stock = {
@@ -75,8 +76,7 @@ class BertradeApiTest(unittest.TestCase):
         self._assert_first_stock(response_test)
 
     def test_stock_by_industry_name(self):
-        response = self.api.get(
-            API_ROOT_URL + '/stocks?industry=Restaurants')
+        response = self.api.get(API_ROOT_URL + '/stocks?industry=Restaurants')
         response_test = json.loads(response.data)
         self._assert_first_stock(response_test)
 
