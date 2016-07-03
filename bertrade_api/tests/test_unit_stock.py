@@ -15,6 +15,22 @@ class StockModelTest(unittest.TestCase):
     def setUp(self):
         pass
 
+    def _assert_first_stock(self, assert_obj):
+        self.assertEqual(assert_obj.local_ticker, 'AC')
+        self.assertEqual(assert_obj.yahoo_ticker, '')
+        self.assertEqual(assert_obj.bloomberg_ticker, 'AC.MX')
+        self.assertEqual(assert_obj.name, 'ARCA CONTINENTAL, S.A.B. DE C.V.')
+        self.assertEqual(assert_obj.img, '')
+        self.assertEqual(assert_obj.listing_date, '13/12/2001')
+        self.assertEqual(assert_obj.industries, ['Consumer Staples',
+                         'Consumer Products'])
+        self.assertEqual(assert_obj.company_description,
+                         'Bottles non-alcoholic branded beverages.')
+        self.assertEqual(assert_obj.brands_products,
+                         ['Coca-Cola', 'Ciel', 'Jugos del Valle'])
+        self.assertEqual(assert_obj.key_people,
+                         ['Tomas Alberto Fernandez', 'Luis Arizpe'])
+
     def test_new_stock(self):
         industries = ['Retail', 'Biotechnology', 'Beverages']
         brands_products = ['Brandio', 'Marquita', 'Baimi', 'Kaufmir']
@@ -41,20 +57,7 @@ class StockModelTest(unittest.TestCase):
     def test_find_all_stocks(self):
         stocks = Stock.find_all()
         stock_1 = stocks[0]
-        self.assertEqual(stock_1.local_ticker, 'AC')
-        self.assertEqual(stock_1.yahoo_ticker, '')
-        self.assertEqual(stock_1.bloomberg_ticker, 'AC.MX')
-        self.assertEqual(stock_1.name, 'ARCA CONTINENTAL, S.A.B. DE C.V.')
-        self.assertEqual(stock_1.img, '')
-        self.assertEqual(stock_1.listing_date, '13/12/2001')
-        self.assertEqual(stock_1.industries, ['Consumer Staples',
-                         'Consumer Products'])
-        self.assertEqual(stock_1.company_description,
-                         'Bottles non-alcoholic branded beverages.')
-        self.assertEqual(stock_1.brands_products,
-                         ['Coca-Cola', 'Ciel', 'Jugos del Valle'])
-        self.assertEqual(stock_1.key_people,
-                         ['Tomas Alberto Fernandez', 'Luis Arizpe'])
+        self._assert_first_stock(stock_1)
 
         stock_2 = stocks[1]
         self.assertEqual(stock_2.local_ticker, 'ALSEA')
@@ -74,53 +77,15 @@ class StockModelTest(unittest.TestCase):
 
     def test_find_stock_by_ticker(self):
         stock = Stock.find('AC')
-        self.assertEqual(stock.local_ticker, 'AC')
-        self.assertEqual(stock.yahoo_ticker, '')
-        self.assertEqual(stock.bloomberg_ticker, 'AC.MX')
-        self.assertEqual(stock.name, 'ARCA CONTINENTAL, S.A.B. DE C.V.')
-        self.assertEqual(stock.img, '')
-        self.assertEqual(stock.listing_date, '13/12/2001')
-        self.assertEqual(stock.industries,
-                         ['Consumer Staples', 'Consumer Products'])
-        self.assertEqual(stock.company_description,
-                         'Bottles non-alcoholic branded beverages.')
-        self.assertEqual(stock.brands_products,
-                         ['Coca-Cola', 'Ciel', 'Jugos del Valle'])
-        self.assertEqual(stock.key_people,
-                         ['Tomas Alberto Fernandez', 'Luis Arizpe'])
+        self._assert_first_stock(stock)
 
     def test_single_stock_by_name(self):
         stock = Stock.find_one({'name': 'Arca Continental'})
-        self.assertEqual(stock.local_ticker, 'AC')
-        self.assertEqual(stock.yahoo_ticker, '')
-        self.assertEqual(stock.bloomberg_ticker, 'AC.MX')
-        self.assertEqual(stock.name, 'ARCA CONTINENTAL, S.A.B. DE C.V.')
-        self.assertEqual(stock.img, '')
-        self.assertEqual(stock.listing_date, '13/12/2001')
-        self.assertEqual(stock.industries, ['Consumer Staples',
-                         'Consumer Products'])
-        self.assertEqual(stock.company_description,
-                         'Bottles non-alcoholic branded beverages.')
-        self.assertEqual(stock.brands_products,
-                         ['Coca-Cola', 'Ciel', 'Jugos del Valle'])
-        self.assertEqual(stock.key_people,
-                         ['Tomas Alberto Fernandez', 'Luis Arizpe'])
+        self._assert_first_stock(stock)
 
     def test_find_allstocks_by_industry_name(self):
         stock = Stock.find({'industry': 'Consumer Products'})
-        self.assertEqual(stock.yahoo_ticker, '')
-        self.assertEqual(stock.bloomberg_ticker, 'AC.MX')
-        self.assertEqual(stock.name, 'ARCA CONTINENTAL, S.A.B. DE C.V.')
-        self.assertEqual(stock.img, '')
-        self.assertEqual(stock.listing_date, '13/12/2001')
-        self.assertEqual(stock.industries, ['Consumer Staples',
-                         'Consumer Products'])
-        self.assertEqual(stock.company_description,
-                         'Bottles non-alcoholic branded beverages.')
-        self.assertEqual(stock.brands_products,
-                         ['Coca-Cola', 'Ciel', 'Jugos del Valle'])
-        self.assertEqual(stock.key_people,
-                         ['Tomas Alberto Fernandez', 'Luis Arizpe'])
+        self._assert_first_stock(stock)
 
 
 if __name__ == '__main__':
