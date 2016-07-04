@@ -1,7 +1,0 @@
-[run]
-include = bertade_api/api.py
-include = bertade_api/models.py
-
-[report]
-show_missing = True
-precision = 2
