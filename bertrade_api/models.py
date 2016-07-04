@@ -1,6 +1,11 @@
 '''
 Models.
 '''
+import json
+
+from fuzzywuzzy import fuzz
+
+MIN_FUZZ_RATIO = 98
 
 
 class Stock():
@@ -32,13 +37,54 @@ class Stock():
         self.test_mode = test_mode
 
     @staticmethod
-    def find(search_dict, test_mode=False):
-        return None
+    def _compare_strings(a, b):
+        if fuzz.partial_ratio(a, b) >= MIN_FUZZ_RATIO:
+            return True
+        if fuzz.token_set_ratio(a, b) == 100:
+            return True
+        return False
 
     @staticmethod
-    def find_one(search_dict, test_mode=False):
-        return None
+    def find_one(search_dict, test_mode=False, as_dict=True):
+        if not test_mode:
+            json_path = 'stocks.json'
+        else:
+            json_path = 'tests/test_stocks.json'
+        stocks = json.load(open(json_path))
+
+        if search_dict.get('local_ticker'):
+            for stock in stocks['stocks']:
+                if stock['local_ticker'] == search_dict['local_ticker']:
+                    return stock
+        if search_dict.get('name'):
+            for stock in stocks['stocks']:
+                if Stock._compare_strings(stock['name'], search_dict['name']):
+                    return stock
+
+        return {'error': 'Stock not found'}
 
     @staticmethod
-    def find_all(test_mode=False):
-        return []
+    def find(search_dict, test_mode=False, as_dict=True):
+        if not test_mode:
+            json_path = 'stocks.json'
+        else:
+            json_path = 'tests/test_stocks.json'
+        stocks = json.load(open(json_path))
+
+        if search_dict.get('industry'):
+            matching_stocks = []
+            for stock in stocks['stocks']:
+                for industry in stock['industries']:
+                    if Stock._compare_strings(industry, search_dict['industry']):
+                        matching_stocks.append(stock)
+                        break
+            return matching_stocks
+
+    @staticmethod
+    def find_all(test_mode=False, as_dict=True):
+        if not test_mode:
+            json_path = 'stocks.json'
+        else:
+            json_path = 'tests/test_stocks.json'
+        stocks = json.load(open(json_path))
+        return stocks
