@@ -8,5 +8,6 @@ install:
 script:
   - cd bertrade_api
   - coverage run -m unittest discover
+  - coverage report --rcfile=../.coveragerc
 after_success:
   - coveralls
